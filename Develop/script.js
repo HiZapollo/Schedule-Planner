@@ -10,12 +10,29 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
+
+  $('button.saveBtn').on('click', function() {
+    var parent = $(this).parent();
+    var events = parent.find('textarea').val();
+    var stringEvents = JSON.stringify(events);
+    localStorage.setItem(parent.attr('id'), stringEvents);
+  })
   
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+
+  function compareIdWithTime (id){
+    if (id.attr('id') === currentHour){
+      id.removeClass('past future').addClass('present');
+    } else if (id.attr('id') < currentHour){
+      id.removeClass('future present').addClass('past');
+    } else {
+      id.removeClass('past present').addClass('future');
+    }
+  }
 
   for (var i = 9; i < 18; i++){
     var timeBlock = $('#'+ i);
@@ -25,18 +42,21 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
+
+  for (var i = 9; i < 18; i++){
+    var timeBlock = $('#'+ i);
+    var events = timeBlock.find('textarea');
+    for (var j = 0; j <= localStorage.length; j++) {
+      if (timeBlock.attr('id') === localStorage.key(j)) {
+        var rememberedEvents = JSON.parse(localStorage.getItem(i));
+        events.text(rememberedEvents)
+      }
+    }
+  }
   
   // TODO: Add code to display the current date in the header of the page.
   var currentDayElement = $('#currentDay');
   currentDayElement.text(currentDate.format('dddd, MMMM D'));
 });
 
-function compareIdWithTime (id){
-  if (id.attr('id') === currentHour){
-    id.removeClass('past future').addClass('present');
-  } else if (id.attr('id') < currentHour){
-    id.removeClass('future present').addClass('past');
-  } else {
-    id.removeClass('past present').addClass('future');
-  }
-}
+
