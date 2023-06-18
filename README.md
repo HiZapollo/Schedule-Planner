@@ -12,7 +12,8 @@ N/A
 
 This website can be used to schedule events from times 9AM to 5PM. Just type whatever plan you have in the appropriate time slot, then click the save button. When the time slot is in the future, it will be green. It will be red in the present hour, and grey if in the past.
 
-![schedule planner website, with the date at the top of the page, and time blocks for times from 9AM to 5PM]
+![schedule planner website, with the date at the top of the page, and time blocks for times from 9AM to 5PM](https://github.com/HiZapollo/Schedule-Planner/assets/129823817/2ef555b3-a609-4165-8edf-79cc891c8678)
+
 
 
 
